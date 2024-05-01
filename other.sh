@@ -41,7 +41,7 @@ do
             done
             ;;
         2)
-            apt install gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom dosbox milkytracker libsdl2-net-dev cmake spek -y
+            apt install gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth dsda-doom freedoom dosbox milkytracker libsdl2-net-dev cmake spek bison flex -y
             apt purge minetest-server
             cmd=(dialog --keep-tite --menu "Select Web browser:" 22 76 16)
 
@@ -72,7 +72,7 @@ do
             done
             ;;
         3)
-            apt install gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth mixxx ardour dsda-doom freedoom dosbox minetest* bsdgames gnome-2048 libsdl2-net-dev gnome-breakout milkytracker cmake spek -y
+            apt install gufw handbrake audacious audacity putty gimp vlc-plugin-fluidsynth fluidsynth mixxx ardour dsda-doom freedoom dosbox minetest* bsdgames gnome-2048 libsdl2-net-dev gnome-breakout milkytracker cmake spek bison flex -y
             cmd=(dialog --keep-tite --menu "Select Web browser:" 22 76 16)
 
             options=(1 "chromium"
