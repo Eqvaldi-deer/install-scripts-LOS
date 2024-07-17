@@ -5,7 +5,7 @@ echo
 echo                    Copyright © Eqvaldi-deer/Eqvaldi-records                   
 echo                                                                               
 echo                                                                               
-echo                                   2017-2023                                   
+echo                                   2017-2024                                   
 echo                                                                               
 echo                               special thanks to:                              
 echo                                                                             
@@ -30,7 +30,9 @@ options=(1 "Cinnamon"
          5 "MATE"
          6 "LXQT"
          7 "FVWM-3"
-	 8 "Skip to Firmware install")
+         8 "Enlightenment"
+         9 "KDE"
+	 10 "Skip to Firmware install")
 
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
@@ -486,6 +488,134 @@ do
 			done
             ;;
         8)
+            apt install enlightenment xfce4-terminal connman thunar pulseaudio numix-icon-theme pasystray light-locker lightdm-gtk-greeter-settings lightdm file-roller f3 network-manager-gnome galculator ghostscript libmtp-runtime vlc hyfetch ristretto xorg synaptic gdebi htop gnome-icon-theme usb-modeswitch blueman genisoimage gnome-disk-utility gvfs-fuse mousepad inputattach xserver-xorg-input-all xserver-xorg-input-synaptics xserver-xorg-video-all xserver-xorg-video-qxl xorg software-properties-qt system-config-printer transmission-gtk tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter ffmpeg build-essential libcurl4-openssl-dev libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec60 exfalso flac font-manager libjpeg-dev xfce4-screenshooter catfish libglx-mesa0 libgl1-mesa-dri thunar-archive-plugin -y
+            apt install dbus-x11 build-essential git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build qtbase5-dev qtbase5-private-dev qtbase5-dev-tools qttools5-dev openssl miniupnpc libao-dev vainfo vdpauinfo libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev glmark2-* -y
+            apt update
+            apt upgrade -y
+            rm /etc/apt/sources.list.d/vscode.list
+            rm /etc/apt/trusted.gpg.d/microsoft.gpg
+            apt purge snapd -y
+            echo 'Package: snapd' > /etc/apt/preferences.d/nosnap.pref
+            echo 'Pin: release a=*' >> /etc/apt/preferences.d/nosnap.pref
+            echo 'Pin-Priority: -10' >> /etc/apt/preferences.d/nosnap.pref
+            cat /etc/apt/preferences.d/nosnap.pref
+            	cmd=(dialog --keep-tite --menu "choose OS:" 22 76 16)
+
+		options=(1 "Debian (server)"
+ 		         2 "Debian for Raspberry Pi (server)"
+         		 3 "Raspberry Pi OS (server)"
+			 4 "Armbian (Debian server)")
+
+		choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+
+		for choice in $choices
+		do
+		    case $choice in
+		        1)
+		            rm /etc/apt/sources.list
+		            echo 'deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            echo 'deb-src http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            echo 'deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            echo 'deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            echo 'deb http://deb.debian.org/debian bookworm-backports main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+			    echo 'deb-src http://deb.debian.org/debian bookworm-backports main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+			    echo 'deb http://security.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            echo 'deb-src http://security.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            cat /etc/apt/sources.list
+		            apt update -y
+		            bash ./firmware.sh
+            
+		            ;;
+		        2)
+		            rm /etc/apt/sources.list
+		            echo 'deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            echo 'deb-src http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            echo 'deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            echo 'deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            echo 'deb http://deb.debian.org/debian bookworm-backports main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+			    echo 'deb-src http://deb.debian.org/debian bookworm-backports main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+			    echo 'deb http://security.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            echo 'deb-src http://security.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            cat /etc/apt/sources.list
+		            apt update -y
+		            bash ./firmware.sh
+		            ;;
+
+		        3)
+		            bash ./firmware.sh
+		            ;;
+		        4)
+		            bash ./firmware.sh
+            		    ;;
+            
+    			    esac
+			done
+            ;;
+        9)
+            apt install kde-plasma-desktop kdenetwork pulseaudio pasystray f3 ghostscript libmtp-runtime vlc hyfetch gwenview kcolorchooser kde-spectacle kgamma5 xorg synaptic gdebi htop usb-modeswitch blueman genisoimage gvfs-fuse plasma-pa kate inputattach xserver-xorg-input-all xserver-xorg-input-synaptics xserver-xorg-video-all xserver-xorg-video-qxl xorg software-properties-qt system-config-printer transmission-qt tumbler mesa-utils gparted xarchiver p7zip zip unzip uuid-runtime mesa-utils-bin gvfs-backends gvfs-common soundconverter ffmpeg build-essential libcurl4-openssl-dev libalut-dev libsdl2-dev libsdl2-mixer-dev libgtk-3-dev libgtk3-perl ffmpeg libavcodec60 exfalso flac libjpeg-dev libglx-mesa0 libgl1-mesa-dri -y
+            apt install dbus-x11 build-essential git nasm libgl1-mesa-dev libsdl2-dev flac libflac-dev libvpx-dev libgtk2.0-dev freepats ninja-build qtbase5-dev qtbase5-private-dev qtbase5-dev-tools qttools5-dev openssl miniupnpc libao-dev vainfo vdpauinfo libzip-dev zipcmp zipmerge ziptool libsdl2-mixer-dev glmark2-* -y
+            apt update
+            apt upgrade -y
+            rm /etc/apt/sources.list.d/vscode.list
+            rm /etc/apt/trusted.gpg.d/microsoft.gpg
+            apt purge snapd -y
+            echo 'Package: snapd' > /etc/apt/preferences.d/nosnap.pref
+            echo 'Pin: release a=*' >> /etc/apt/preferences.d/nosnap.pref
+            echo 'Pin-Priority: -10' >> /etc/apt/preferences.d/nosnap.pref
+            cat /etc/apt/preferences.d/nosnap.pref
+            	cmd=(dialog --keep-tite --menu "choose OS:" 22 76 16)
+
+		options=(1 "Debian (server)"
+ 		         2 "Debian for Raspberry Pi (server)"
+         		 3 "Raspberry Pi OS (server)"
+			 4 "Armbian (Debian server)")
+
+		choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+
+		for choice in $choices
+		do
+		    case $choice in
+		        1)
+		            rm /etc/apt/sources.list
+		            echo 'deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            echo 'deb-src http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            echo 'deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            echo 'deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            echo 'deb http://deb.debian.org/debian bookworm-backports main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+			    echo 'deb-src http://deb.debian.org/debian bookworm-backports main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+			    echo 'deb http://security.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            echo 'deb-src http://security.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            cat /etc/apt/sources.list
+		            apt update -y
+		            bash ./firmware.sh
+            
+		            ;;
+		        2)
+		            rm /etc/apt/sources.list
+		            echo 'deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            echo 'deb-src http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            echo 'deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            echo 'deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            echo 'deb http://deb.debian.org/debian bookworm-backports main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+			    echo 'deb-src http://deb.debian.org/debian bookworm-backports main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+			    echo 'deb http://security.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            echo 'deb-src http://security.debian.org/debian-security/ bookworm-security main contrib non-free non-free-firmware' >> /etc/apt/sources.list
+		            cat /etc/apt/sources.list
+		            apt update -y
+		            bash ./firmware.sh
+		            ;;
+
+		        3)
+		            bash ./firmware.sh
+		            ;;
+		        4)
+		            bash ./firmware.sh
+            		    ;;
+            
+    			    esac
+			done
+            ;;
+        10)
             	cmd=(dialog --keep-tite --menu "choose OS:" 22 76 16)
 
 		options=(1 "Debian (server)"
